@@ -1,0 +1,62 @@
+{
+  "name": "claude-token-status",
+  "displayName": "Claude Code Token Status",
+  "description": "Shows the remaining token budget for the current Claude Code session in the status bar.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudeTokenStatus.refresh",
+        "title": "Claude Token Status: Refresh"
+      },
+      {
+        "command": "claudeTokenStatus.openTranscript",
+        "title": "Claude Token Status: Open Session Transcript"
+      }
+    ],
+    "configuration": {
+      "title": "Claude Token Status",
+      "properties": {
+        "claudeTokenStatus.warnThresholdPercent": {
+          "type": "number",
+          "default": 20,
+          "description": "Show a yellow warning when the remaining share of the token budget drops below this percentage."
+        },
+        "claudeTokenStatus.criticalThresholdPercent": {
+          "type": "number",
+          "default": 5,
+          "description": "Show a red warning when the remaining share of the token budget drops below this percentage."
+        },
+        "claudeTokenStatus.refreshIntervalMinutes": {
+          "type": "number",
+          "default": 5,
+          "description": "How often (in minutes) the status bar should refresh automatically."
+        },
+        "claudeTokenStatus.claudePath": {
+          "type": "string",
+          "default": "claude",
+          "description": "Path to the claude executable, if it isn't on PATH."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
